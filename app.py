@@ -4,6 +4,10 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly.graph_objs as go
 import pandas as pd
+import logging
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s==%(funcName)s==%(message)s')
 
 all_names = pd.read_csv('data/by_yr_name_sex.csv')
 
@@ -31,6 +35,7 @@ app.layout = html.Div([
 @app.callback(Output('by_year_graph', 'figure'),
              [Input('select_names', 'value')])
 def plot_names_by_year(nameslist):
+    logging.info(msg=locals())
     df = all_names[all_names['names'].isin(nameslist)].groupby(['year','names'])['births'].sum().to_frame().reset_index()
     return {
         'data': [go.Scatter(x=df[df['names'] == n]['year'],
