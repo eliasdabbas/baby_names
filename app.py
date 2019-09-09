@@ -28,7 +28,7 @@ app.layout = html.Div([
         
     ], style={'width': '60%', 'margin-left': '20%'}),
     html.Div([
-        html.Br() for x in range(10)
+        html.Br() for x in range(5)
     ])
 ], style={'background-color': '#eeeeee', 'font-family': 'Palatino'})
 
